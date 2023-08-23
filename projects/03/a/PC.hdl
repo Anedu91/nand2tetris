@@ -17,4 +17,28 @@ CHIP PC {
 
     PARTS:
     // Put your code here:
+
+
+    // input
+
+
+
+
+
+
+    Inc16(in=current, out=increment);
+
+    // first if inc[t] == 1
+    Mux16(a=current, b=increment, sel=inc, out=r1);
+
+    // second if load[t] == 1
+    Mux16(a=r1, b=in, sel=load, out=r2);
+
+    // third if reset[t] == 1
+    Mux16(a=r2, b=false, sel=reset, out=r3);
+
+
+
+    // load always true, controlling value outside of the register
+    Register(in=r3, load=true, out=out, out=current);
 }
